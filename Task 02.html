@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Checker</title>
+
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #1e2a38;
+            padding: 30px;
+            border-radius: 12px;
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            color: white;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #00e5ff;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #00e5ff;
+            font-size: 15px;
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        input::placeholder {
+            color: #b0bec5;
+        }
+
+        button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 8px;
+            background-color: #00e5ff;
+            color: #003344;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #00bcd4;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Number Checker</h2>
+
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    <br>
+    <button onclick="checkNumber()">Check</button>
+
+    <div id="message"></div>
+</div>
+
+<script>
+function checkNumber() {
+
+    let value = document.getElementById("numberInput").value;
+    let messageBox = document.getElementById("message");
+
+    if (value === "") {
+        alert("Please enter a number first!");
+        return;
+    }
+
+    let num = parseInt(value);
+    let evenOddText = (num % 2 === 0) ? "Even" : "Odd";
+
+    if (num > 0) {
+        messageBox.style.color = "#00ff95";
+        messageBox.innerHTML = evenOddText + " and Positive Number";
+    }
+    else if (num < 0) {
+        messageBox.style.color = "#ff5252";
+        messageBox.innerHTML = evenOddText + " and Negative Number";
+    }
+    else {
+        messageBox.style.color = "#ffd740";
+        messageBox.innerHTML = "Zero (Neither Positive nor Negative)";
+    }
+}
+</script>
+
+</body>
+</html>

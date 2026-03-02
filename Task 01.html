@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Math Tool</title>
+
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background-color: #1e1e2f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: #2c2c3e;
+            padding: 25px;
+            border-radius: 12px;
+            width: 320px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .field {
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 6px;
+            border: none;
+            outline: none;
+        }
+
+        .btn-group {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 4px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            background-color: #ff9800;
+            color: white;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background-color: #e68900;
+        }
+
+        #output {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Math Calculator</h1>
+
+    <div class="field">
+        <input type="number" id="first" placeholder="First value">
+    </div>
+
+    <div class="field">
+        <input type="number" id="second" placeholder="Second value">
+    </div>
+
+    <div class="btn-group">
+        <button onclick="operate('add')">+</button>
+        <button onclick="operate('sub')">-</button>
+        <button onclick="operate('mul')">*</button>
+        <button onclick="operate('div')">/</button>
+    </div>
+
+    <div id="output"></div>
+</div>
+
+<script>
+function operate(type) {
+
+    const a = document.getElementById("first").value.trim();
+    const b = document.getElementById("second").value.trim();
+    const display = document.getElementById("output");
+
+    // Check empty fields
+    if (!a || !b) {
+        alert("Error: Both fields are required!");
+        display.textContent = "Both fields are required!";
+        display.style.color = "red";
+        return;
+    }
+
+    const numA = parseFloat(a);
+    const numB = parseFloat(b);
+
+    // Check invalid numbers
+    if (isNaN(numA) || isNaN(numB)) {
+        alert("Error: Please enter valid numbers!");
+        display.textContent = "Invalid input!";
+        display.style.color = "red";
+        return;
+    }
+
+    let answer;
+
+    switch(type) {
+
+        case "add":
+            answer = numA + numB;
+            break;
+
+        case "sub":
+            answer = numA - numB;
+            break;
+
+        case "mul":
+            answer = numA * numB;
+            break;
+
+        case "div":
+            if (numB === 0) {
+                alert("Error: Division by zero is not allowed!");
+                display.textContent = "Division by zero is not allowed!";
+                display.style.color = "red";
+                return;
+            }
+            answer = numA / numB;
+            break;
+    }
+
+    display.textContent = "Result: " + answer;
+    display.style.color = "#00ff88";
+}
+</script>
+
+</body>
+</html>

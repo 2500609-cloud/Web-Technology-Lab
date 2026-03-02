@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Analyzer</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1d2b64, #f8cdda);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            width: 450px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #1d2b64;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 2px solid #1d2b64;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .output {
+            margin-top: 25px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .output div {
+            margin: 8px 0;
+            padding: 10px;
+            background: #f2f2f2;
+            border-left: 5px solid #dd2476;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Array Analyzer</h2>
+
+    <input type="text" id="arrayInput" placeholder="Enter numbers separated by commas">
+    <br>
+    <button onclick="analyzeArray()">Analyze</button>
+
+    <div class="output" id="result"></div>
+</div>
+
+<script>
+function analyzeArray() {
+
+    let input = document.getElementById("arrayInput").value;
+    let resultBox = document.getElementById("result");
+
+    if (input.trim() === "") {
+        alert("Please enter some numbers!");
+        return;
+    }
+
+    // Convert input string into array of numbers
+    let values = input.split(",").map(num => parseFloat(num.trim()));
+
+    if (values.some(isNaN)) {
+        alert("Please enter valid numbers only!");
+        return;
+    }
+
+    let total = values.reduce((sum, num) => sum + num, 0);
+    let highest = Math.max(...values);
+    let lowest = Math.min(...values);
+    let reversedArray = values.slice().reverse();
+
+    resultBox.innerHTML = `
+        <div><strong>Array:</strong> ${values.join(" | ")}</div>
+        <div><strong>Total:</strong> ${total}</div>
+        <div><strong>Highest:</strong> ${highest}</div>
+        <div><strong>Lowest:</strong> ${lowest}</div>
+        <div><strong>Reversed:</strong> ${reversedArray.join(" | ")}</div>
+    `;
+}
+</script>
+
+</body>
+</html>
